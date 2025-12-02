@@ -105,6 +105,8 @@ Como parte del desarrollo responsable de IA, se declaran los siguientes aspectos
 
 ---
 
+> ⚠️ **Nota de Rendimiento:** Se incluye un notebook optimizado para **Kaggle** (`KAguilar_Adriana_Villa_Edwin_EA3_GenerativeAI_NB_k`). Se recomienda utilizar esta versión para entrenar el modelo, ya que aprovecha las **GPUs T4 x2** y permite una ejecución estable de 300+ épocas para obtener resultados de alta definición. Se uso como comparativo en temas de optimización de recursos de google colab vs Kaggle.
+
 ## 📄 Licencia
 
 Este proyecto es de código abierto bajo la Licencia MIT. Eres libre de usarlo, modificarlo y distribuirlo, citando la autoría original.
