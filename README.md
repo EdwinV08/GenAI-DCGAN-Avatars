@@ -14,9 +14,10 @@ El repositorio está organizado siguiendo el flujo de trabajo estándar de *Mach
 
 ```text
 DCGAN-Synthetic-Faces/
-├── 📄 README.md                 # Documentación general, instalación y uso.
+├── 📄 README.md                 # Documentación general.
+├── 📄 requirements.txt          # Dependencias y librerías necesarias. 
 ├── 📁 notebooks/
-│   ├── 📓 Aguilar_Adriana_Villa_Edwin_EA3_GenerativeAI_NB_k.ipynb    # Versión OPTIMIZADA (GPUs T4x2, 300 épocas).
+│   ├── 📓 Aguilar_Adriana_Villa_Edwin_EA3_GenerativeAI_NB_k.ipynb         # Versión OPTIMIZADA (GPUs T4x2, 300 épocas).
 │   └── 📓 Aguilar_Adriana_Villa_Edwin_EA3_GenerativeAI_Notebook.ipynb     # Versión estándar para pruebas rápidas y temas academicos
 ├── 📁 results/                  # Evidencia generada
 │   ├── 📊 comparativa_loss.png  # Gráfica de estabilidad de los experimentos.
