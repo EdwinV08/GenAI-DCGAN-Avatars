@@ -8,6 +8,26 @@ Este proyecto implementa una **Red Generativa Adversaria Convolucional Profunda 
 
 El sistema genera rostros humanos **sintéticos** (personas que no existen) a partir de ruido aleatorio. Esto permite a las empresas poblar bases de datos de prueba o crear maquetas de diseño sin infringir normativas como la **GDPR (Reglamento General de Protección de Datos)**, ya que no se utilizan fotografías de personas reales para el producto final.
 
+## 📂 Estructura del Proyecto
+
+El repositorio está organizado siguiendo el flujo de trabajo estándar de *Machine Learning Ops* (MLOps), dividido en notebook de ejecución y documentación:
+
+```text
+DCGAN-Synthetic-Faces/
+├── 📄 README.md                 # Documentación general, instalación y uso.
+├── 📁 notebooks/
+│   ├── 📓 Aguilar_Adriana_Villa_Edwin_EA3_GenerativeAI_NB_k.ipynb    # Versión OPTIMIZADA (GPUs T4x2, 300 épocas).
+│   └── 📓 Aguilar_Adriana_Villa_Edwin_EA3_GenerativeAI_Notebook.ipynb     # Versión estándar para pruebas rápidas y temas academicos
+├── 📁 results/                  # Evidencia generada
+│   ├── 📊 comparativa_loss.png  # Gráfica de estabilidad de los experimentos.
+│   └── 🖼️ evolution_sample.png  # Comparativa: Rostros borrosos vs Nítidos.
+└── 📁 src_modules/              # (Lógica contenida en los notebooks)
+    ├── A_Data_Pipeline.py       # Descarga y normalización (LFW Dataset).
+    ├── B_Architecture.py        # Clases PyTorch: Generator() y Discriminator().
+    ├── C_Experimentation.py     # Motor de pruebas de hiperparámetros.
+    └── D_Interface_Gradio.py    # Backend de la Web App (UI).
+
+
 **Capacidades del Sistema:**
 *   ✅ Generación de imágenes RGB de 64x64px.
 *   ✅ Entrenamiento estable optimizado mediante *Label Smoothing*.
