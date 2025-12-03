@@ -1,115 +1,94 @@
-# 🧬 GenAI-DCGAN: Generador de Avatares Sintéticos
+# 🧬 Generación de Avatares Sintéticos con DCGAN
 
-<!-- Badge de Colab para acceso rápido -->
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c)](https://pytorch.org/)
-[![Gradio](https://img.shields.io/badge/Gradio-UI-orange)](https://gradio.app/)
+![Estado](https://img.shields.io/badge/Estado-Completado-green) ![Tech](https://img.shields.io/badge/Tech-PyTorch%20%7C%20Gradio-firebrick) ![Entorno](https://img.shields.io/badge/Entorno-Kaggle%20%2F%20Colab-blue)
 
-> **Proyecto de Ingeniería de Software / Deep Learning**  
-> Desarrollo de una Red Generativa Adversaria (DCGAN) capaz de sintetizar rostros humanos originales a partir de ruido gaussiano, enfocado en privacidad de datos y diseño UX.
+## 📖 Introducción General
 
----
+Este proyecto implementa una **Red Generativa Adversaria Convolucional Profunda (DCGAN)** diseñada para resolver problemáticas de privacidad de datos y derechos de autor en la industria del desarrollo de software y el marketing.
 
-## 📋 Descripción del Proyecto
+El sistema genera rostros humanos **sintéticos** (personas que no existen) a partir de ruido aleatorio. Esto permite a las empresas poblar bases de datos de prueba o crear maquetas de diseño sin infringir normativas como la **GDPR (Reglamento General de Protección de Datos)**, ya que no se utilizan fotografías de personas reales para el producto final.
 
-En el contexto actual de la protección de datos (GDPR/CCPA) y los derechos de imagen, el uso de fotografías reales para prototipado de software, campañas de marketing o entrenamiento de IAs plantea riesgos legales y éticos significativos.
-
-Este proyecto implementa una solución de **Inteligencia Artificial Generativa** que crea "personas que no existen". Utilizando una arquitectura DCGAN entrenada sobre el dataset LFW (Labeled Faces in the Wild), el sistema aprende la distribución latente de los rasgos faciales humanos para generar nuevas muestras on-demand.
-
-### ✨ Características Principales
-*   **Generación en Tiempo Real:** Inferencia rápida en CPU/GPU tras el entrenamiento.
-*   **Interfaz Interactiva:** Dashboard web basado en Gradio para controlar la generación.
-*   **Privacidad por Diseño:** Los avatares generados son sintéticos y libres de derechos.
-*   **Entrenamiento Estable:** Implementación de técnicas como *Label Smoothing* para mitigar el colapso del modo.
+**Capacidades del Sistema:**
+*   ✅ Generación de imágenes RGB de 64x64px.
+*   ✅ Entrenamiento estable optimizado mediante *Label Smoothing*.
+*   ✅ Interfaz Web interactiva para la generación bajo demanda y auditoría técnica.
 
 ---
 
-## 🛠️ Stack Tecnológico
+## ⚙️ Requisitos e Instalación
 
-*   **Lenguaje:** Python 3.10+
-*   **Motor de IA:** PyTorch & Torchvision
-*   **Interfaz:** Gradio 3.x
-*   **Procesamiento de Datos:** NumPy, Scikit-Learn
-*   **Visualización:** Matplotlib
+El proyecto está autocontenido en Notebooks de Python y diseñado para ejecutarse en la nube (Kaggle/Colab). Las dependencias principales se instalan automáticamente al inicio del script:
 
----
-
-## 🧠 Arquitectura del Modelo (Deep Learning)
-
-El sistema se basa en un juego de suma cero entre dos redes neuronales profundas (DCGAN):
-
-| Componente | Estructura Técnica | Función |
-| :--- | :--- | :--- |
-| **Generador (G)** | `Input Z(100)` $\to$ `ConvTranspose2d` $\to$ `BatchNorm` $\to$ `ReLU` $\to$ `Output(64x64)` | Toma un vector de ruido y "sueña" una imagen. |
-| **Discriminador (D)** | `Input(64x64)` $\to$ `Conv2d` $\to$ `LeakyReLU(0.2)` $\to$ `Sigmoid` | Actúa como crítico, clasificando si la imagen es real o falsa. |
-
-### Optimizaciones Implementadas
-1.  **Label Smoothing:** Se ajustaron las etiquetas reales a `0.9` en lugar de `1.0`. Esto introduce incertidumbre en el Discriminador, evitando que se vuelva demasiado "confiado" y permitiendo que el Generador aprenda durante más tiempo.
-2.  **Pesos Iniciales:** Inicialización personalizada con distribución normal (`mean=0.0`, `std=0.02`) según el paper de Radford et al.
-3.  **Optimizador:** Adam (`lr=0.0002`, `beta1=0.5`).
+*   **PyTorch & Torchvision:** Núcleo de Deep Learning.
+*   **Gradio:** Para el despliegue de la interfaz de usuario.
+*   **Scikit-learn:** Para la descarga controlada del dataset LFW.
+*   **Matplotlib:** Para la visualización de pérdidas y resultados en tiempo real.
 
 ---
 
-## 🚀 Guía de Instalación y Ejecución
+## 🛠️ Configuración y Entornos
 
-Existen dos formas de ejecutar este proyecto:
+Se proporcionan dos versiones del notebook. Seleccione la adecuada según sus necesidades de rendimiento:
 
-### Opción A: Google Colab (Recomendada)
-Para probar el sistema sin instalaciones locales y usando GPUs gratuitas:
-1.  Haz clic en el botón **"Open in Colab"** al inicio de este documento.
-2.  En Colab, ve a `Entorno de ejecución` > `Cambiar tipo de entorno` > **T4 GPU**.
-3.  Ejecuta todas las celdas (Menú `Entorno de ejecución` > `Ejecutar todas`).
-4.  Al finalizar, busca el enlace público generado al final (ej: `https://xxxx.gradio.live`).
+### 🏆 Opción A: Versión Kaggle (Recomendada - Alta Calidad)
+**Archivo:** `DCGAN_Kaggle_Optimized.ipynb`
 
-### Opción B: Ejecución Local
-1.  **Clonar repositorio:**
-    ```bash
-    git clone https://github.com/TU_USUARIO/NOMBRE_DEL_REPO.git
-    cd NOMBRE_DEL_REPO
-    ```
-2.  **Instalar dependencias:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-3.  **Ejecutar Jupyter Notebook:**
-    ```bash
-    jupyter notebook
-    ```
-    Y abre el archivo `.ipynb`.
+Esta versión aprovecha las **GPUs T4 x2** de Kaggle para realizar un entrenamiento profundo de **300 épocas**, logrando la mayor nitidez visual.
+
+> **⚠️ GUÍA DE EJECUCIÓN OBLIGATORIA EN KAGGLE:**
+> Para evitar errores de conexión o rendimiento, ajuste el panel derecho ("Session Options"):
+> 1.  **Accelerator:** Seleccione `GPU T4 x2` (o P100).
+> 2.  **Internet:** Cambie a `Internet On`. (Requerido para bajar librerías y dataset).
+>     * *Nota: Si la opción está bloqueada, Kaggle requiere verificar su cuenta con un número celular.*
+> 3.  **Persistencia:** Opcional. Cambie a "Files only" si desea descargar el modelo `.pth` resultante.
+
+### Opción B: Versión Colab (Estándar)
+**Archivo:** `DCGAN_Colab_Standard.ipynb`
+Versión ideal para pruebas rápidas o integración con Google Drive.
+*   Configuración: Vaya a *Entorno de ejecución > Cambiar tipo de entorno > Acelerador de hardware: GPU T4*.
 
 ---
 
-## 📖 Manual de Usuario
+## 🚀 Guía de Uso
 
-Una vez desplegada la interfaz de Gradio, encontrarás los siguientes controles:
-
-1.  **Slider "Cantidad de Avatares":**
-    *   Define cuántas imágenes generar en lote (1 a 16).
-    *   *Tip:* Generar más imágenes consume más RAM, pero permite ver más variedad.
-2.  **Slider "Semilla (Seed)":**
-    *   Valor `-1`: Generación totalmente aleatoria.
-    *   Valor `> 0` (ej. 42): Generación determinista. Útil si encuentras un rostro que te gusta y quieres volver a generarlo idéntico.
-3.  **Botón "Generar":**
-    *   Dispara el proceso de inferencia. La primera vez puede tardar unos segundos mientras el modelo calienta.
+1.  **Carga del Notebook:** Abra el archivo `.ipynb` correspondiente en la plataforma seleccionada.
+2.  **Ejecución Secuencial:** Ejecute todas las celdas en orden. El sistema realizará:
+    *   Descarga y normalización del dataset (corrige el bug de tensores negros).
+    *   Entrenamiento del modelo final.
+    *   Lanzamiento del servidor web.
+3.  **Acceso a la Demo:** Al finalizar, el notebook lanzará un servidor de Gradio y proporcionará un **Enlace Público** (ej. `https://xxxx.gradio.live`).
+    *   Cree, copie el enlace y ábralo en una nueva pestaña.
+    *   *Nota: No detenga la ejecución de la celda mientras usa la interfaz.*
 
 ---
 
-## ⚖️ Análisis Ético y Limitaciones
+## 🧪 Experimentación Técnica
 
-Como parte del desarrollo responsable de IA, se declaran los siguientes aspectos:
+Durante el desarrollo, se validaron tres hipótesis mediante experimentación automatizada para asegurar la estabilidad del modelo:
 
-*   **Sesgos del Dataset:** El modelo fue entrenado con LFW, un dataset académico histórico que presenta un desbalance significativo hacia sujetos caucásicos, adultos y masculinos. Por ende, las generaciones del modelo reflejarán estos sesgos demográficos.
-    *   *Mitigación propuesta:* Para versiones futuras, se recomienda curar el dataset o utilizar alternativas más inclusivas como *FairFace*.
-*   **Resolución:** La arquitectura actual genera imágenes de **64x64 pixeles**. Son útiles como íconos o avatares pequeños, pero no aptas para impresión de gran formato. Se requeriría escalar a *StyleGAN* o implementar *Super-Resolución* para HD.
-*   **Uso Malicioso:** Aunque las imágenes son sintéticas, el proyecto está diseñado estrictamente para fines de diseño y desarrollo. No se autoriza su uso para creación de perfiles falsos destinados a la desinformación (astroturfing).
+| Experimento | Estrategia | Resultado | Conclusión |
+| :--- | :--- | :--- | :--- |
+| **Exp 1** | **Label Smoothing (Targets = 0.9)** | ✅ **Estable** | **Seleccionado.** Mantuvo el equilibrio de Nash evitando que el discriminador saturara el gradiente. |
+| **Exp 2** | Tasas Diferenciales ($LR_G > LR_D$) | ❌ Inestable | Generó una pérdida inicial excesiva (>3.0) y artefactos visuales de alta frecuencia. |
+| **Exp 3** | Vector Latente Aumentado ($Z=128$) | ⚠️ Volátil | Mostró inestabilidad y caída drástica de la función de pérdida hacia el final. |
 
 ---
 
-> ⚠️ **Nota de Rendimiento:** Se incluye un notebook optimizado para **Kaggle** (`KAguilar_Adriana_Villa_Edwin_EA3_GenerativeAI_NB_k`). Se recomienda utilizar esta versión para entrenar el modelo, ya que aprovecha las **GPUs T4 x2** y permite una ejecución estable de 300+ épocas para obtener resultados de alta definición. Se uso como comparativo en temas de optimización de recursos de google colab vs Kaggle.
+## 💼 Aplicación Práctica
 
-## 📄 Licencia
+La interfaz incluida resuelve tres casos de uso empresariales:
 
-Este proyecto es de código abierto bajo la Licencia MIT. Eres libre de usarlo, modificarlo y distribuirlo, citando la autoría original.
+1.  **DevSecOps:** Provisión de avatares sintéticos para bases de datos de QA (Quality Assurance), eliminando riesgos legales.
+2.  **Diseño UX/UI:** Creación de *Buyer Personas* visuales para prototipado rápido de aplicaciones.
+3.  **Entretenimiento:** Generación procedural de texturas faciales para NPCs en videojuegos.
 
-**Desarrollado por Adriana Aguilar y Edwin Villa**  
-*Ingeniería de Software y Datos*
+---
+
+## 📄 Licencia y Datos
+
+*   **Dataset Base:** [Labeled Faces in the Wild (LFW)](http://vis-www.cs.umass.edu/lfw/). Utilizado bajo licencia académica/investigativa.
+*   **Licencia del Código:** Este proyecto se distribuye bajo licencia **MIT** para fines educativos.
+*   **Autoría:** Desarrollado como Proyecto Final de Ingeniería de Software y datos (Deep Learning avanzado).
+*   Autores: Adriana Aguilar y Edwin Villa.
+
+---
