@@ -104,7 +104,8 @@ La interfaz incluida resuelve tres casos de uso empresariales:
 3.  **Entretenimiento:** Generación procedural de texturas faciales para NPCs en videojuegos.
 
 Nota sobre Métricas de Evaluación:
-"Debido a la naturaleza de demostración interactiva en tiempo real del proyecto, se seleccionó la Evaluación Cualitativa (Visual Inspection) y el monitoreo de Estabilidad de Nash (Generator/Discriminator Loss) como métricas principales. Se desestimó el uso de FID (Fréchet Inception Distance) para priorizar el tiempo de cómputo en la maximización de épocas de entrenamiento (300 épocas), dado que el FID requiere inferencia masiva sobre una red InceptionV3 externa, lo cual excedía la latencia objetivo de la demostración."
+Debido a la naturaleza de demostración interactiva en tiempo real del proyecto, se seleccionó la Evaluación Cualitativa (Visual Inspection) y el monitoreo de Estabilidad de Nash (Generator/Discriminator Loss) como métricas principales. Se desestimó el uso de FID (Fréchet Inception Distance) para priorizar el tiempo de cómputo en la maximización de épocas de entrenamiento (300 épocas),
+dado que el FID requiere inferencia masiva sobre una red InceptionV3 externa, lo cual excedía la latencia objetivo de la demostración.
 
 ---
 
